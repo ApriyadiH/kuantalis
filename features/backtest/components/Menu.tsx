@@ -1,8 +1,13 @@
 // features\backtest\components\Menu.tsx
+"use client";
 
 import Image from "next/image";
 
-export default function Menu() {
+interface MenuProps {
+  onSelectBlock: (imagePath: string, x: number, y: number) => void;
+}
+
+export default function Menu({ onSelectBlock }: MenuProps) {
   const menuItems = ["Peak", "Order"];
 
   return (
@@ -13,6 +18,11 @@ export default function Menu() {
           {menuItems.map((item) => (
             <button
               key={item}
+              onClick={(e) => {
+                e.stopPropagation();
+                const imagePath = `/block/${item}.png`;
+                onSelectBlock(imagePath, e.clientX, e.clientY);
+              }}
               className="relative flex aspect-square w-15 items-center justify-center rounded-2xl bg-green-100 shadow-lg transition hover:-translate-y-1 hover:shadow-xl active:translate-y-0"
             >
               <Image
