@@ -1,22 +1,23 @@
 // app\page.tsx
 
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Home() {
-  const menuItems = ["backtest", "scraping", "predictive", "report"];
+  const homeItems = ["backtest", "scrape", "predictive", "report"];
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-green-100 p-6">
-      <div className="w-full max-w-2xl rounded-3xl bg-white p-10 shadow-xl">
+    <main className="flex min-h-screen items-center justify-center bg-green-100 p-4">
+      <div className="w-full max-w-2xl rounded-2xl bg-white p-4 shadow-xl">
         {/* Header */}
-        <div className="flex h-24 flex-row items-center justify-center gap-5">
-          <img src="/icon.png" alt="Kuantalis icon" className="h-15 w-15" />
+        <div className="flex flex-row items-center justify-center gap-5 p-4">
+          <Image src="/icon.png" alt="Kuantalis icon" width={60} height={60} />
           <h1 className="text-5xl font-bold">Kuantalis</h1>
         </div>
 
         {/* Menu */}
-        <div className="grid grid-cols-2 gap-5">
-          {menuItems.map((item) => (
+        <div className="grid grid-cols-2 gap-4">
+          {homeItems.map((item) => (
             <Link
               key={item}
               href={`/${item}`}
