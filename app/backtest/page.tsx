@@ -10,7 +10,7 @@ import Chart from "../../features/backtest/components/Chart";
 import Result from "../../features/backtest/components/Result";
 
 export interface SelectedBlock {
-  id: string;
+  id: number;
   blockName: string;
   source: string;
 }
@@ -35,10 +35,18 @@ export default function BacktestPage() {
     };
   }, [selectedBlock]);
 
+  const handleCancelSelection = () => {
+    if (!selectedBlock) return;
+
+    if (selectedBlock.source === "Menu") {
+      setSelectedBlock(null);
+    }
+  };
+
   return (
     <div
       className="flex h-screen w-full overflow-hidden bg-green-100"
-      onClick={() => setSelectedBlock(null)}
+      onClick={() => handleCancelSelection()}
     >
       <Menu
         onSelectMenu={(block, x, y) => {
@@ -48,6 +56,7 @@ export default function BacktestPage() {
       />
       <Workspace
         selectedBlock={selectedBlock}
+        onSelectBlock={(block) => setSelectedBlock(block)}
         onClearSelection={() => setSelectedBlock(null)}
       />
       <div className="flex w-1/2 flex-col">
